@@ -1,0 +1,15 @@
+{
+  "n_files": 1800,
+  "per_class": {
+    "train": 400,
+    "val": 100,
+    "test": 100
+  },
+  "classes": [
+    "bird",
+    "dog",
+    "frog"
+  ],
+  "seed": 463,
+  "pixel_sha256": "b97b28f3a15a30c0e9613347fb5690e4cc2e8e5c120026cdb4caab5e2d04e3e1"
+}

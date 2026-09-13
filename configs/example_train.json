@@ -1,0 +1,13 @@
+{
+  "model": "numpy-mlp",
+  "dataset": "moons",
+  "lr": 0.01,
+  "epochs": 500,
+  "batch_size": 32,
+  "l2": 0.001,
+  "keep_prob": 1.0,
+  "optimizer": "adam",
+  "hidden": [16, 8],
+  "seed": 463,
+  "out_dir": "runs"
+}

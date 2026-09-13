@@ -1,0 +1,12 @@
+{
+  "dataset": "mnist",
+  "epochs": 3,
+  "batch_size": 64,
+  "lr": 0.001,
+  "limit_train": null,
+  "augment": true,
+  "pool": "max",
+  "seed": 463,
+  "out_dir": "runs",
+  "name": "lenet5_mnist_full"
+}

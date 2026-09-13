@@ -1,0 +1,24 @@
+# virtualenv และ cache
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# ข้อมูลที่ดาวน์โหลดอัตโนมัติ และผลการเทรน
+data/mnist/
+data/MNIST/
+runs/
+
+# OS
+.DS_Store
+
+# CIFAR-10 ต้นทางที่ scripts/make_image_dataset.py ดาวน์โหลด (data/cifar3/ ที่ export แล้ว commit ไว้)
+data/cifar-10-batches-py/
+data/cifar-10-python.tar.gz
+data/cifar10-hf/
+
+# งานของนิสิตที่ copy ไปทำเอง (README แนะนำให้ตั้งชื่อลงท้าย _mywork)
+notebooks/*_mywork.ipynb
+*_mywork.ipynb

@@ -1,0 +1,6 @@
+monthly_usage_hours,subscription_type,churn
+12,Basic,Yes
+50,Standard,No
+8,Premium,Yes
+30,Standard,No
+5,Basic,Yes
