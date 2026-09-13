@@ -61,24 +61,49 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ### ขั้นที่ 2 · ดาวน์โหลด lab และติดตั้ง library (ทำครั้งเดียว)
 
-คำสั่งเหมือนกันทุกระบบ (Windows ใช้ PowerShell)
+**สำคัญ: `git clone` จะสร้างโฟลเดอร์ `neural-network-lab` ไว้ "ในโฟลเดอร์ที่ terminal อยู่ตอนนั้น"** ดังนั้นต้อง `cd` ไปยังที่ที่อยากเก็บ lab ก่อน
+(terminal ที่เพิ่งเปิดจะอยู่ที่โฟลเดอร์บ้านของผู้ใช้ — ดูตำแหน่งปัจจุบันได้ด้วยคำสั่ง `pwd`)
+
+<details><summary><b>macOS / Linux</b> — เก็บไว้ที่ Documents</summary>
+
+```bash
+cd ~/Documents
+pwd                      # ต้องขึ้น /Users/<ชื่อคุณ>/Documents (macOS) หรือ /home/<ชื่อคุณ>/Documents (Linux)
+```
+</details>
+
+<details><summary><b>Windows</b> — เก็บไว้ที่ C:\lab (path สั้น ไม่มีภาษาไทยหรือช่องว่าง)</summary>
+
+```powershell
+mkdir C:\lab
+cd C:\lab
+pwd                      # ต้องขึ้น C:\lab
+```
+</details>
+
+จากนั้นรัน 3 คำสั่งนี้ (เหมือนกันทุกระบบ) — บรรทัดที่สองคือการ "เข้าไปใน" โฟลเดอร์ที่เพิ่ง clone มา
 
 ```bash
 git clone https://github.com/VRU-AI-SWU/neural-network-lab.git
 cd neural-network-lab
 uv sync
 ```
+หลัง `cd neural-network-lab` ลองพิมพ์ `ls` (Windows ใช้ `dir` ได้เช่นกัน) ต้องเห็น `pyproject.toml`, `notebooks`, `src` — ถ้าไม่เห็น แสดงว่ายังไม่ได้อยู่ในโฟลเดอร์ lab
 `uv sync` จะดาวน์โหลด Python 3.10 (ถ้าเครื่องยังไม่มี) และติดตั้ง numpy, pandas, scikit-learn, PyTorch, Jupyter ตาม `uv.lock`
 ลงในโฟลเดอร์ `.venv` ภายใน lab — ทุกคนได้ version เดียวกัน ไม่กระทบ Python อื่นในเครื่อง
+โฟลเดอร์ที่ได้จะอยู่ที่ `~/Documents/neural-network-lab` (macOS/Linux) หรือ `C:\lab\neural-network-lab` (Windows) เปิดดูใน Finder / File Explorer ได้ตามปกติ
 
-### ขั้นที่ 3 · เปิด notebook
+### ขั้นที่ 3 · เปิด notebook (ทำทุกครั้งที่จะเรียน)
+
+คำสั่ง `uv run ...` ต้องรัน**จากในโฟลเดอร์ `neural-network-lab`** — ทุกครั้งที่เปิด terminal ใหม่ให้ `cd` เข้าไปก่อน
 
 ```bash
+cd ~/Documents/neural-network-lab        # Windows: cd C:\lab\neural-network-lab
 uv run jupyter lab
 ```
 browser จะเปิดขึ้นเอง (ถ้าไม่เปิด ให้คลิกลิงก์ `http://localhost:8888/...` ใน terminal) → เข้าโฟลเดอร์ `notebooks/` → เปิด `lab00_setup_check.ipynb` แล้วกด `Shift+Enter` ทีละ cell
 ถ้า cell แรกพิมพ์ version ของทุก library ได้ แสดงว่าพร้อมแล้ว ไปต่อที่ lab01 ตามลำดับในตารางด้านล่าง
-ปิด Jupyter ด้วย `Ctrl+C` ใน terminal (กดสองครั้ง)
+ปิด Jupyter ด้วย `Ctrl+C` ใน terminal (กดสองครั้ง) — งานที่ทำใน notebook ถูกบันทึกเมื่อกด save (`Ctrl+S`) ใน Jupyter
 
 **ใช้ VS Code แทนได้:** ติดตั้ง extension "Python" และ "Jupyter" → File → Open Folder เลือก `neural-network-lab` → เปิดไฟล์ `.ipynb` → มุมขวาบน "Select Kernel" → เลือก `.venv` (Python 3.10) ที่อยู่ในโฟลเดอร์นี้
 
@@ -88,6 +113,8 @@ lab01-13 ปิดท้ายด้วยส่วน **แบบฝึกห�
 cell ตรวจรันได้ทันที: ⏳ = ยังไม่ได้ทำ · ✗ = ยังไม่ถูก (มีคำใบ้) · ✓ PASS = ถูกแล้ว ทำซ้ำได้ไม่จำกัด และมี cell `summary()` สรุปท้าย lab
 
 ### อัปเดต lab เมื่อผู้สอนแก้ไข
+
+รันจากในโฟลเดอร์ `neural-network-lab` (`cd` เข้าไปก่อนเหมือนขั้นที่ 3)
 
 ```bash
 git pull
@@ -104,6 +131,8 @@ git stash && git pull && git stash pop
 | อาการ | วิธีแก้ |
 |---|---|
 | `uv: command not found` / `'uv' is not recognized` | ปิดแล้วเปิด terminal ใหม่ (ต้องโหลด PATH ใหม่หลังติดตั้ง) |
+| `No pyproject.toml found in current directory` หรือ Jupyter เปิดแล้วไม่เห็นโฟลเดอร์ `notebooks` | terminal ไม่ได้อยู่ในโฟลเดอร์ lab — `cd ~/Documents/neural-network-lab` (Windows: `cd C:\lab\neural-network-lab`) แล้วรันใหม่ |
+| `fatal: destination path 'neural-network-lab' already exists` ตอน clone | เคย clone ไว้แล้ว — ไม่ต้อง clone ซ้ำ แค่ `cd neural-network-lab` แล้วทำขั้นต่อไป (อัปเดตด้วย `git pull`) |
 | Windows: `running scripts is disabled on this system` | รัน PowerShell ด้วยคำสั่งติดตั้งที่มี `-ExecutionPolicy ByPass` ตามด้านบน หรือใช้ Command Prompt |
 | `ModuleNotFoundError: No module named 'nnlab'` ใน notebook | เลือก kernel ผิด — เปิด Jupyter ด้วย `uv run jupyter lab` เสมอ หรือใน VS Code เลือก kernel `.venv` |
 | `uv sync` ช้าหรือหลุดกลางทาง | รันซ้ำได้เลย จะดาวน์โหลดต่อจากที่ค้าง; ถ้าใช้ Wi-Fi มหาวิทยาลัยแล้วช้า ลอง hotspot |
